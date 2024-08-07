@@ -35,4 +35,42 @@ pipeline {
             }
         }
     }
-}   
+        stage('Code Coverage') {
+            steps {
+                jacoco execPattern: 'target/jacoco.exec', classPattern: 'target/classes', sourcePattern: 'src/main/java', exclusionPattern: '**/Test*', changeBuildStatus: true
+            }
+        }
+
+        stage('Cyclomatic Complexity') {
+            steps {
+                sh 'lizard .'
+                publishHTML(target: [
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: true,
+                    keepAll: true,
+                    reportDir: 'lizard-report',
+                    reportFiles: 'index.html',
+                    reportName: 'Cyclomatic Complexity Report'
+                ])
+            }
+        }
+        
+        stage('Security Vulnerability Scan') {
+            steps {
+                sh 'dependency-check.sh --project your-project --scan .'
+                dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+            }
+        }
+        
+        stage('Quality Gate') {
+            steps {
+                script {
+                    def qg = waitForQualityGate()
+                    if (qg.status != 'OK') {
+                        error "Pipeline aborted due to quality gate failure: ${qg.status}"
+                    }
+                }
+            }
+        }
+    }
+
