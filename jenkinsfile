@@ -22,7 +22,8 @@ pipeline {
                             -Dsonar.organization=ipshitact \
                             -Dsonar.sources=. \
                             -Dsonar.host.url=https://sonarcloud.io \
-                            -Dsonar.login=bf0a5119898648af390b5aa8868fe35ecdbd6f74"
+                            -Dsonar.login=bf0a5119898648af390b5aa8868fe35ecdbd6f74" \
+                            -X  // Enable debug mode
                     }
                 }
             }
