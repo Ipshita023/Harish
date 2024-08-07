@@ -9,32 +9,33 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/IpshitaCT/Jenkins_Task.git'
+                git branch: 'main', url: 'https://github.com/IpshitaCT/harish-jenkins-task.git'
             }
         }
+        
         stage('SonarCloud Scan') {
             steps {
                 script {
                     def scannerHome = tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
                     withSonarQubeEnv('SonarCloud') {
                         sh "${scannerHome}/bin/sonar-scanner \
-                            -Dsonar.projectKey=IpshitaCT_harish-jenkins-task\
+                            -Dsonar.projectKey=IpshitaCT_harish-jenkins-task \
                             -Dsonar.organization=ipshitact \
                             -Dsonar.sources=. \
                             -Dsonar.host.url=https://sonarcloud.io \
-                            -Dsonar.login=bf0a5119898648af390b5aa8868fe35ecdbd6f74" \
-                            -X  // Enable debug mode
+                            -Dsonar.login=bf0a5119898648af390b5aa8868fe35ecdbd6f74"
                     }
                 }
             }
         }
+        
         stage('Build and Test') {
             steps {
                 // Run Maven build which includes JaCoCo code coverage
                 sh 'mvn clean test'
             }
         }
-    }
+        
         stage('Code Coverage') {
             steps {
                 jacoco execPattern: 'target/jacoco.exec', classPattern: 'target/classes', sourcePattern: 'src/main/java', exclusionPattern: '**/Test*', changeBuildStatus: true
@@ -73,4 +74,4 @@ pipeline {
             }
         }
     }
-
+}
