@@ -51,7 +51,7 @@ pipeline {
         stage('Code Coverage') {
             steps {
                 // Change directory to where your pom.xml is located
-                dir('/') {
+                dir('/var/lib/jenkins/workspace/score-me-assignment') {
                     // Run Maven build which includes JaCoCo code coverage
                     sh 'mvn clean test'
                     jacoco execPattern: 'target/jacoco.exec', classPattern: 'target/classes', sourcePattern: 'src/main/java', exclusionPattern: '**/Test*', changeBuildStatus: true
