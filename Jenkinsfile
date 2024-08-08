@@ -39,7 +39,7 @@ pipeline {
         stage('Code Coverage') {
             steps {
                 // Change directory to where your pom.xml is located
-                dir('pom.xml') {
+                dir('/') {
                     // Run Maven build which includes JaCoCo code coverage
                     sh 'mvn clean test'
                     jacoco execPattern: 'target/jacoco.exec', classPattern: 'target/classes', sourcePattern: 'src/main/java', exclusionPattern: '**/Test*', changeBuildStatus: true
