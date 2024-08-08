@@ -61,7 +61,10 @@ pipeline {
 
         stage('Cyclomatic Complexity') {
             steps {
-                sh 'lizard .'
+                sh """
+                export PATH=$PATH:~/.local/bin
+                lizard .
+                """
                 publishHTML(target: [
                     allowMissing: false,
                     alwaysLinkToLastBuild: true,
