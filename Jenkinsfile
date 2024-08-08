@@ -59,19 +59,19 @@ pipeline {
             }
         }
 
-        stage('Cyclomatic Complexity') {
-            steps {
-                sh 'lizard .'
-                publishHTML(target: [
-                    allowMissing: false,
-                    alwaysLinkToLastBuild: true,
-                    keepAll: true,
-                    reportDir: 'lizard-report',
-                    reportFiles: 'index.html',
-                    reportName: 'Cyclomatic Complexity Report'
-                ])
-            }
-        }
+        // stage('Cyclomatic Complexity') {
+        //     steps {
+        //         sh 'lizard .'
+        //         publishHTML(target: [
+        //             allowMissing: false,
+        //             alwaysLinkToLastBuild: true,
+        //             keepAll: true,
+        //             reportDir: 'lizard-report',
+        //             reportFiles: 'index.html',
+        //             reportName: 'Cyclomatic Complexity Report'
+        //         ])
+        //     }
+        // }
         
         stage('Security Vulnerability Scan') {
             steps {
