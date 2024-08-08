@@ -18,7 +18,7 @@ pipeline {
                  
             }
         }
-        stage('List Files') {
+        stage('file path') {
             steps {
                sh 'pwd'
                  
