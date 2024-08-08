@@ -12,6 +12,11 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/IpshitaCT/harish-jenkins-task.git'
             }
         }
+        stage('List Files') {
+            steps {
+               sh 'ls -al'
+            }
+        }
         
         stage('SonarCloud Scan') {
             steps {
