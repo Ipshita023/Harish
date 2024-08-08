@@ -15,6 +15,13 @@ pipeline {
         stage('List Files') {
             steps {
                sh 'ls -al'
+                 
+            }
+        }
+        stage('List Files') {
+            steps {
+               sh 'pwd'
+                 
             }
         }
         
