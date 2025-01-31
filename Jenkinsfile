@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/IpshitaCT/harish-jenkins-task.git'
+                git branch: 'main', url: 'https://github.com/Ipshita023/Harish.git'
             }
         }
         stage('List Files') {
